@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Brookside</title>
+
+	<!-- meta:vp -->
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+	<link rel="stylesheet" href="lib/css/jquery.mobile.structure-1.4.5.min.css">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/grid.css">
+    <script src="lib/js/jquery-2.2.4.min.js"></script>
+	<script src="js/app.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/helpers.js"></script>
+    <script src="js/pages.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/popup.js"></script>
+	<script src="lib/js/jquery.mobile-1.4.5.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400" rel="stylesheet">
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7dIlxOsG2XKQ0dOCr6UGdnCgDwMGDKvQ"
+    async defer></script>
+
+</head>
+<body>
+
+	<section data-role="page" id="intro">
+   	    <div date-role="main" class="ui-content" style="background-color:#ffd369; background-size: 100%; height: 100%">
+   	    	<br>
+   	    	<br>
+
+   	        <div class="logoArea"><img src="imgs/logo-cow.png" style="width:150px"></div>
+   	      
+   	       <form class="selection space-top form-pannal">
+                    <a href="#">
+                    	<input type="button" data-role="none" value="Create an account" class="selection-btn" id="btn-create" onclick="openCreate()"></a>
+        		    <a href="#"><input type="button" data-role="none" value="Log In" class="selection-btn" id="btn-login" onclick="openLogin(); closeSignAlerm()"></a>
+                </form>
+            </div> 
+    
+            <!-- ------create new page---------- -->
+         <div data-role="none" id="creatAccount">
+            	<div date-role="header" class="header">
+            		<a href="#" onclick="closeCreate()"><img src="imgs/back.svg"  style="width: 20px; margin: 1em .9em"></a></div>
+            	<div date-role="main" class="justfy-between hearder ui-content login-signin-main">  
+            		<br>
+            		<div class="h-flex h-margin-top h-padding-side margin-top-20px">
+            		<div class="text-align log-in-logo"><img src="imgs/logo-cow.png"></div>
+            	
+            		<div class="text-align h-text-height">Create an account</div>
+            	   </div>
+   
+   
+               <form data-ajax="false" class="form login-form1 " data-role="none" id="create-form">
+               	    <div class="h-flex">
+            			<div class="username login-input">
+            				<label class="label-name">Full Name</label>
+            				<input type="text" class="create-form-group" data-role="none" placeholder="User name" id="create-name" required>
+            			</div>
+            			 <div class="email login-input">
+            			 	<label class="label-name">User Name</label>
+            				<input type="text" class="create-form-group" data-role="none" placeholder="User name" id="create-username" required>
+            			</div>
+            		</div>
+            		<div class="h-flex">
+            			<div class="password login-input">
+            				<label class="label-name">Email</label>
+            				<input type="text" class="create-form-group" data-role="none" placeholder="Type your email" id="create-email" required>
+            			</div>
+            			<div class="passwordAgain login-input">
+            				<label class="label-name">Password</label>
+            				<input type="password" class="create-form-group" data-role="none" placeholder="Type your password" id="create-password" required>
+            			</div>
+            		</div>
+            		<div class="submit">
+            				<input type="submit" data-role="none" class="selection-btn form-button" value="Create an account" id="createAccount1">
+            		    </div>	
+            	</form>
+
+            	<!-- small popup to notify user dont discard-->
+
+            	<div class="alert-mark" onclick="closeCreate()" style="display:none" id="create-alarm-mark"></div>
+            	<div class="alert" style="display:none" id="create-alarm">
+            	<img src="imgs/comfirm.svg" id="Notif-icon" width="30px">
+            	<h4>Your account has been successfully created</h4>
+            	<br>
+            	<a href="" onclick="closeCreate()">
+            	<input type="button" data-role="none" class="alert-btn" value="CLOSE" onclick="closeAlerm()"></a>    	
+            </div>
+            	
+            </div>
+           
+         </div>
+            <!-- ------login---------- -->
+           <div data-role="none" id="login">
+            	<div date-role="header" class="header"><a href="#" onclick="closeLogin()"><img src="imgs/back.svg" style="width: 20px; margin: 1em .9em"></a></div>
+            	<div date-role="main" class="justfy-between hearder ui-content login-signin-main">  
+            	<div class="h-flex">
+            		<div class="text-align log-in-logo"><img src="imgs/logo-cow.png"></div>
+            	
+            		<div class="text-align h-text-height">Log into your account</div>
+            	</div>
+            		
+            		<form data-ajax="false" class="form login-form1" id="login-form" name="myForm">
+            			<div class="h-flex">
+            			<div class="username login-input">
+            			   <label class="label-name">User Name</label>
+            				<input type="text" class="create-form-group" data-role="none" placeholder="User name" id="login-username" required>
+            			</div>
+            			<div class="password login-input">
+            			    <label class="label-name">Password</label>
+            				<input type="password" class="create-form-group" data-role="none" placeholder="Password" id="login-password" required>
+            				<label id="forget">Forget password?</label>
+            			</div>
+           
+            		</div>
+            	
+            			<div class="submit">
+            				<input type="submit" data-role="none" class="selection-btn" value="Log In" id="login1">
+            			</div>
+            		</form>
+             </div>
+             <!-- alert notification -->
+                 <div class="alert-mark sign-alarm-mark" onclick="closeSignAlerm()" id="signin-alarm-mark" style="display:none">
+                 </div>
+            	<div class="alert hidden" id="signin-alarm" style="display:none">
+	            	<img src="imgs/wrong.svg" width="30px">
+	            	<h4>Incorrect password or username</h4>
+	            	<br>
+	            	<a href="" onclick="closeSignAlerm()">
+	            	<input type="button" data-role="none" class="alert-btn" value="CLOSE" onclick=""></a>    	
+                </div>
+            </div>
+    </section>
+
+	<section data-role="page" id="homepage">
+		<div class="sidebar-mark sidebar-mark-body" id="sidebar-mark-id-body"></div>
+		
+			
+		<header data-role="header" class="flex-parent justfy-between header">
+			 <div class="sidebar-mark" id="sidebar-mark-id"></div>
+			<div class="sidebar">
+				<div class="menu">
+					<div class="menu-icon">
+						
+					</div><!-- icon -->
+					
+
+ <!---- ------------------side-menu-------------------->
+					<div class="side-menu" id="side-menu" >
+
+					    <header data-role="none" class="wrap">
+					    	<div class="profile-icon">
+									<a href="#settings-page" class="setting-icon-a">
+							            <img id="settings-icon"src="imgs/settings.svg" >
+							        </a>
+							    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+							 <div id="profile-info"></div>
+					   
+						</header>
+
+						 <div data-role="main" class="profile personal-content">
+							<div class="personal-content-slides">
+
+							    <h4>Your animals</h4>
+							    
+							        <div class="saved-animals">
+							    		
+							   
+							    </div>
+							</div>
+							
+					
+					
+  				     
+					    </div>
+		            </div>
+                </div>
+            </div>
+           </div>
+        
+
+	    
+		</header>
+		<div data-role="main" class="homepage-main">
+		    <div id="map"></div>
+
+			
+			<!-- <div class="select-icon homepage-icon">
+				<div class="select-icon-pin" style="width: 40px"><img src="imgs/pin.svg"></div>
+				<div class="select-icon-centered" style="width: 40px"><img src="imgs/cursor.svg"></div>
+				<div class="select-icon-centered" style="width: 40px"><img src="imgs/camera.svg"></div>
+			</div>  -->
+
+			<div class="modal" id="homepage-animal-info-modal">
+				<div class="modal-back modal-back-transparent" data-deactivate="#homepage-animal-info-modal"></div>
+				<div class="modal-drawer bottom">
+					<div class="fold-symbol1">
+						<div class="fold-symbol1-child"></div></div>
+						 <div class="modal-body"></div>
+					    
+				
+					</div>
+		        </div>
+		       </div>
+
+       <!-- -----footer: pop-up:add animal on homapage-------- -->
+		<footer data-role="footer" class="nav" data-template="#footer-nav-template"></footer>
+		<div class="mask" id="mask" data-deactivate=""></div>
+
+			<div class="addAnimal-popup" id="add-popup1">
+			 	<div class="popup-header flex-parent">
+			 		<div><a href="#" onclick="openAddAnimalAlerm()">
+				  		<span>&times;</span></a>
+				  	</div>
+				  	<h3 class="flex-child">ADD AN ANIMAL</h3>
+				  
+				</div>
+				<br>
+			  	
+			  	<div class="popup-body">
+			  		<form class="add-animal-list" id="list-add-form" data-ajax="false">
+				  		<div class="edit-animal-name">
+				  			<label class="add-animal-label">Name</label>
+				  			<input type="text" data-role="none" placeholder="Animal's name" class="add-animal-info" id="add-animal-name" required>
+				  		</div>
+				  		<div class="edit-animal-name">
+			  		   		<label class="add-animal-label">Type of the animal</label>
+			  		   		 <select data-role="none" id="add-animal-type" class="add-animal-info select-bar" style="background-image: url(imgs/drop-down.svg);background-size: 15px; background-repeat: no-repeat;background-position: 95%;">   
+			  		   			 <option value="select">Please select</option>
+			  		   			 <option value="cow">cow</option>
+			  		   			 <option value="dog">dog</option>
+			  		   			 <option value="pig">pig</option>
+			  		   			 <option value="chiken">chicken</option>
+			  		   			 <option value="donkey">donkey</option>
+			  		   			 <option value="horse">horse</option>
+			  		   			 <option value="duck">duck</option>
+			  		   			 <option value="sheep">sheep</option>
+			  		   	    </select>
+						</div>
+		
+
+				  			<div class="edit-animal-name">
+				  				<label class="add-animal-label">Age</label>
+				  			    <input type="text" data-role="none" placeholder="Animal's age" class="add-animal-info" id="add-animal-age" required="">
+				  			</div>
+
+							<div class="edit-animal-name">
+				  				<label class="add-animal-label">Gender</label>
+				  				<select id="add-animal-gender" data-role="none" class="add-animal-info select-bar" style="background-image: url(imgs/drop-down.svg);background-size: 15px; background-repeat: no-repeat;background-position: 95%;">
+				  					<option value="select" required>Please select</option>
+				  					<option value="famale">Famale</option>
+				  					<option value="male">Male</option>
+				  				</select>
+				  		   </div>
+				  		  
+				  		    <div class="edit-animal-name">
+				  				<label class="add-animal-label flex-parent">Friendly<p style="font-size:.em">(minimum 0 maximum 5)</p></label>
+				  				<input type="text" data-role="none" placeholder="How friendly does the animal" class="add-animal-info" id="add-animal-friendly
+				  			    ">
+				  			</div>
+				  		<!-- 	<div class="input add-animal-favorite-food">
+				  				<label class="add-animal-label">Favorite Food</label>
+				  				<input type="text" data-role="none" placeholder="Favorite food" class="btn-br add-animal-info" id="add-animal-favorite-food
+				  			    ">
+				  			</div>
+				  			<br> -->
+				  			<div class="edit-animal-name">
+				  				<label class="add-animal-label">Description</label>
+				  				<textarea type="text" data-role="none" placeholder="Describe the animal" class="add-animal-info animal-description" id="add-animal-description-id"></textarea>
+				  			</div>
+				  			<br>
+				  			<div class="add-animal-submit">
+				  				<input type="submit" data-role="none" value="" class="add-animal-btn-input" data-deactivate="#add-popup1" style="background-image: url(imgs/send.svg);background-repeat: no-repeat;background-size: 20px" >
+				  			</div>
+
+			  	    </form>
+
+			  	    <div class="alert" id="add-animal-alarm" style="display: none">
+		            	<img src="imgs/wrong.svg" width="30px">
+		            	<h4>Discard changes?</h4>
+		            	<br>
+		            	<div class="flex-parent add-animal-alerm-btn">
+			            	<a href="" onclick="">
+			            	<input type="button" data-role="none" class="alert-btn" value="Cancel" onclick="closeAddAnimalAlerm()"></a>
+			            	<a href="" onclick="">
+			            	<input type="button" data-role="none" class="alert-btn" value="Discard" onclick="discardAddAnimalAlerm()"></a>
+			            </div>  	
+                    </div>
+			  	  
+			  	
+			  </div>
+			 </div>
+			
+	</section>
+
+	
+
+	<!--list page-->
+
+	<section data-role="page" id="list-page" role=banner >
+	    <header data-role="header" class="header inside-header" style="background-image: url(imgs/list.png); background-repeat: no-repeat;background-size: 100%" id="list-page-header-id">
+            <form action="" id="search-bar-form" data-ajax="false">
+	    	   <input type="search" style="background-image: url(imgs/search.svg);background-size: 20px;background-repeat: no-repeat;" placeholder="Search your animal" class="list-input" id="list-page-input-id" data-role="none">
+	    	</form>
+
+	    	<!-- <h4 style="color: #040404">Animal List</h4> -->
+            
+		</header>
+
+
+		<div data-role="main" class="animal-list" id="animal-list">
+			<div class="animal-list-content-padding">  	
+			<h4>Select type of animals</h4>
+			<div class="category-animal flex-parent text-align mydeal-nav-brand">
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="chiken"><img src="imgs/i-chicken.svg"><p>Chicken</p></a>
+				</div>
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="dog"><img src="imgs/i-dog.svg"><p>Dog</p></a>
+				</div>
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="pig"><img src="imgs/i-pig.svg"><p>Pig</p></a>
+				</div>
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="duck"><img src="imgs/i-duck.svg"><p>Duck</p></a>
+				</div>
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="horse"><img src="imgs/i-horse.svg"><p>Horse</p></a>
+				</div>
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="cow"><img src="imgs/i-cow.svg"><p>Cow</p></a>
+				</div>
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="donkey"><img src="imgs/i-donkey.svg"><p>Donkey</p></a>
+				</div>
+				<div class="category-animal-img">
+                    <a href="#" class="filter-icon" data-id="sheep"><img src="imgs/i-sheep.svg"><p>Sheep</p></a>
+				</div>
+			</div class="list-page-cover" style="height: 100%">
+		   <form class="switch-form">
+			    <div class="flex-parent lable-group">
+		            <div class="animal-list-content">
+			    	   <h4>Animal List</h4>
+			           <div class="list-content-child">
+			      	        <ul class="animal-list-ul"></ul>
+			            </div>
+			        </div>
+			    </div>
+            </form>
+           </div>
+
+		</div>
+	    </div>
+            
+
+
+        <footer data-role="footer" class="nav">
+           	<ul style="margin:0; margin: 0.3em" class="footer-padding">
+		        <li style="display:flex; text-align: center;" >
+			        <a href="#homepage" style="color:#484848">
+				        <img src="imgs/homepage.svg" style="width: 20px">
+				        <p style="font-size:.7em; margin: 8px;color:#484848">Homepage</p>
+			        </a>
+		        </li>
+		        <li style="text-align: center;">
+			        <a href="#" onclick="openPop()">
+			             <img src="imgs/add.svg" style="width:40px;">
+		            </a>
+		        </li>
+		        <li style="display:flex; text-align: center;">
+			        <a href="#list-page"style="color:"#484848">
+			            <img src="imgs/cow-list.svg" style="width:25px">
+			            <p style="font-size:.7em; margin: 3px; color:#484848; line-height: .9;">Animal List</p>
+		            </a>
+		        </li>
+	        </ul>
+           </footer>
+
+
+			  <!-- add animal on the animals-list -->
+
+		<div class="mask" id="mask1" data-deactivate="#add-popup"></div>
+			<div class="addAnimal-popup" id="add-popup">
+			 	<div class="popup-header flex-parent">
+			 		<div><a href="#" onclick="openAddAnimalAlermL()">
+				  		<span>&times;</span></a>
+				  	</div>
+				  	<h3 class="flex-child">ADD AN ANIMAL</h3>
+				  
+				</div>
+				<br>
+			  	
+			  	<div class="popup-body">
+			  		<form class="add-animal-list" id="list-add-form-1" data-ajax="false">
+				  		<div class="edit-animal-name">
+				  			<label class="add-animal-label">Name</label>
+				  			<input type="text" data-role="none" placeholder="Animal's name" class="add-animal-info" id="add-animal-name-1" required>
+				  		</div>
+				  		<div class="edit-animal-name">
+			  		   		<label class="add-animal-label">Type of the animal</label>
+			  		   		 <select data-role="none" id="add-animal-type-1" class="add-animal-info select-bar" style="background-image: url(imgs/drop-down.svg);background-size: 15px; background-repeat: no-repeat;background-position: 95%;" required>   
+			  		   			 <option value="select">Please select</option>
+			  		   			 <option value="cow">cow</option>
+			  		   			 <option value="dog">dog</option>
+			  		   			 <option value="pig">pig</option>
+			  		   			 <option value="chiken">chicken</option>
+			  		   			 <option value="donkey">donkey</option>
+			  		   			 <option value="horse">horse</option>
+			  		   			 <option value="duck">duck</option>
+			  		   			 <option value="sheep">sheep</option>
+			  		   	    </select>
+						</div>
+		
+
+				  			<div class="edit-animal-name">
+				  				<label class="add-animal-label">Age</label>
+				  			    <input type="text" data-role="none" placeholder="Animal's age" class="add-animal-info" id="add-animal-age-1" required>
+				  			</div>
+
+							<div class="edit-animal-name">
+				  				<label class="add-animal-label">Gender</label>
+				  				<select id="add-animal-gender-1" data-role="none" class="add-animal-info select-bar" style="background-image: url(imgs/drop-down.svg);background-size: 15px; background-repeat: no-repeat;background-position: 95%;" required>
+				  					<option value="select">Please select</option>
+				  					<option value="famale">Famale</option>
+				  					<option value="male">Male</option>
+				  				</select>
+				  		   </div>
+				  		  
+				  		    <div class="edit-animal-name">
+				  				<label class="add-animal-label flex-parent">Friendly<p style="font-size:.em">(minimum 0 maximum 5)</p></label>
+				  				<input type="text" data-role="none" placeholder="How friendly does the animal" class="add-animal-info" id="add-animal-friendly-1
+				  			    ">
+				  			</div>
+				  		<!-- 	<div class="input add-animal-favorite-food">
+				  				<label class="add-animal-label">Favorite Food</label>
+				  				<input type="text" data-role="none" placeholder="Favorite food" class="btn-br add-animal-info" id="add-animal-favorite-food
+				  			    ">
+				  			</div>
+				  			<br> -->
+				  			<div class="edit-animal-name">
+				  				<label class="add-animal-label">Description</label>
+				  				<textarea type="text" data-role="none" placeholder="Describe the animal" class="add-animal-info animal-description" id="add-animal-description-id-1"></textarea>
+				  			</div>
+				  			<br>
+				  			<div class="add-animal-submit">
+				  				<input type="submit" data-role="none" value="" class="add-animal-btn-input" data-deactivate="#add-popup" style="background-image: url(imgs/send.svg);background-repeat: no-repeat;background-size: 20px" >
+				  			</div>
+
+			  	    </form>
+			  	    <div class="alert" id="add-animal-alarm1" style="display: none;">
+		            	<img src="imgs/wrong.svg" width="30px">
+		            	<h4>Discard changes?</h4>
+		            	<br>
+		            	<div class="flex-parent add-animal-alerm-btn">
+			            	<a href="" onclick="">
+			            	<input type="button" data-role="none" class="alert-btn" value="Cancel" onclick="closeAddAnimalAlermL()"></a>
+			            	<a href="" onclick="">
+			            	<input type="button" data-role="none" class="alert-btn" value="Discard" onclick="discardAddAnimalAlermL()"></a>
+			            </div>  	
+                    </div>
+
+			  	  
+			  	
+			  </div>
+			 </div>
+			 
+
+
+		</section>
+
+
+
+<!-- ----------------animal profile--------------------------- -->
+
+
+	<section data-role="page" id="animal-profile">
+		<header data-role="header" class="header animal-profile-header">
+		
+		</header>
+
+
+		    <div data-role="main" class="animal-profile-main">
+		    	<div class="fold-symbol">
+		    		<div class="fold-symbol-child"></div>
+		    	</div>
+		    	<div class="animal-basic-info"></div>
+		    	<div class="icon-add-location">
+		    		<a href="#add-location-page">
+		    			<img src="imgs/addLocation.svg" style="width: 45px"></a>
+		    	</div>
+		    	<h5 style="padding: .5em 1em; font-weight: bolder;">Locations</h5>
+                <div class="map"></div>
+       
+            </div>
+	</section>
+
+	<!-- !!!!!map-------choose a location for the animal -->
+	<section data-role="page" id="select-location">
+	
+
+		<div data-role="main" style="background-image: url(imgs/map.png);background-size: 100% ;background-repeat:cover;">
+		
+			<div class="back-icon">
+				<a href="#list-page"><img src="imgs/back2.svg" style="width: 25px">
+				</a>
+			</div>
+			
+			<div class="seach-bar">
+				<input data-role="none" type="text" placeholder="Or tap a location" class="search-bar-child" style="background-image: url(imgs/search.svg); background-size: 15px; background-repeat: no-repeat;background-position: 10px;">
+				
+			</div>
+		   
+			<div class="select-icon">
+				<div class="select-icon-pin" style="width: 40px"><img src="imgs/pin.svg"></div>
+				<div class="select-icon-centered" style="width: 40px"><img src="imgs/cursor.svg"></div>
+			</div>
+
+			<div class="comfirm-btn">
+				<a href="https://zoeroom.com/aau/wnm617/m13/index.html#homepage #">
+				<input type="button" value="Confirm" data-role="none">
+			   </a>
+			</div>
+           
+	  </div>
+	</section>
+
+
+
+	<!-- ------------------user profile edit page--------------------- -->
+
+	<section data-role="page" id="user-profile-edit">
+	    <header data-role="header">
+	    
+		    	<div class="user-profile-edit-back">
+		    		<a href="#back" data-rel="back" class="user-profile-edit-a">
+		    			<img src="imgs/back.svg" style="width: 20px">
+		    		</a>
+		    		<div><h4 data-role="none" class="user-profile-edit-hader"></div>Edit User Profile</h4>
+		    		<!-- <a href="#" id="send-icon" onclick="document.getElementById('list-user-edit-form').submit();" >
+		    			<img src="imgs/send.svg" style="width: 20px">
+		    	   </a> -->
+		    	</div>
+
+	    </header>
+	    <div data-role="main" class="user-profile-edit-content">
+
+	    	<div class="popup-body">
+	    		<div class="user-profile-edit-pic">
+                   
+                </div>
+
+
+			  	<form class="popup-body-child" id="list-user-edit-form">
+			  		
+			  		<div class="edit-animal-name input">
+			  			<label class="add-animal-label"><h5>Full Name</h5></label>
+			  			<input type="text" data-role="none"  id="edit-user-name" class="add-animal-info">
+			  		</div>
+			  			<div class="edit-animal-name user-profile-edit-input">
+			  				<label class="add-animal-label"><h5>Username</h5></label>
+			  				<input type="text" data-role="none" id="edit-user-username" class="add-animal-info">
+			  			</div>
+			  		 
+			  		    
+			  			<div class="edit-animal-name user-profile-edit-input">
+			  				<label class="add-animal-label"><h5>Gender</h5></label>
+			  				<select id="edit-user-gender" data-role="none" class="add-animal-info" style="background-image: url(imgs/drop-down.svg);background-size: 15px; background-repeat: no-repeat;background-position: 95%;">
+			  					<option value="female">Female</option>
+			  					<option value="male">Male</option>
+			  				</select>
+			  			</div>
+			  			<div class="edit-animal-name user-profile-edit-input">
+			  				<label class="add-animal-label"><h5>Email</h5></label>
+			  				<input type="text" data-role="none"id="edit-user-email" class="add-animal-info">
+			  			</div>
+			  			<div class="edit-animal-name user-profile-edit-input">
+			  				<label class="add-animal-label"><h5>Password</h5></label>
+			  				<input type="password" data-role="none" id="edit-user-password" class="add-animal-info"></a>
+			  			</div>
+			  			
+			  			<input type="submit" value="" data-role="none" class="user-profile-edit-btn" style="background-image:url(imgs/send.svg);background-size: 24px; background-repeat: no-repeat;">
+			  		</form>
+			  	</div>
+			  </div>
+
+	</section>
+	
+
+	 <!-- ----------setttings page-------------- -->
+	<section data-role="page" id="settings-page">
+	    <header data-role="header" class="settings-header">
+          <h4>Settings</h4>
+	    	<div class="user-profile-edit-back">
+	    		<a a href="#back" data-rel="back" class="user-profile-edit-a">
+	    			<img src="imgs/back.svg" style="width: 20px">
+	    		</a>
+	    	</div>
+	  
+	    </header>
+	    <div data-role="main" class="settings-main">
+	    	
+	    	<div class="settings-ul-parent">
+	    		<ul class="settings-ul">
+	    		  <h4>General</h4>
+	    			<li class="flex-parent settings-li">
+	    				<img src="imgs/user.svg" style="width: 20px" class="settings-imgs">
+	    				<p class="settings-p">Account</p>
+	    				<img src="imgs/forward.svg" style="width: 15px"class="settings-imgs">
+	    			</li>
+	    		
+	    	<li class="flex-parent settings-li">
+	    				<img src="imgs/trash.svg" style="width: 20px" class="settings-imgs">
+	    				<p class="settings-p">Delect Account</p>
+	    				<img src="imgs/forward.svg" style="width: 15px"class="settings-imgs">
+	    			</li>
+	    		  </ul>
+	    	</div>
+	    	
+	    	
+	    	<div class="settings-ul-parent">
+	    		<ul class="settings-ul">
+	    		  <h4>Feedback</h4>
+	    			<li class="flex-parent settings-li">
+	    				<img src="imgs/warning.svg" style="width: 20px" class="settings-imgs">
+	    				<p class="settings-p">Report a bug</p>
+	    				<img src="imgs/forward.svg" style="width: 15px"class="settings-imgs">
+	    			</li>
+	    			<li class="flex-parent settings-li">
+	    				<img src="imgs/send.svg" style="width: 20px" class="settings-imgs">
+	    				<p class="settings-p">Send feedback</p>
+	    				<img src="imgs/forward.svg" style="width: 15px"class="settings-imgs">
+	    			</li>
+	    		</ul>
+	    	</div>
+
+	    	
+	    	<div class="settings-ul-parent">
+	    		<ul class="settings-ul">
+	    		  <h4>Logins</h4>
+	    			<a href="" class="js-logout"><li class="flex-parent settings-li">
+	    				<img src="imgs/log-out.svg" style="width: 20px" class="settings-imgs">
+	    				<p class="settings-p" style="font-size: 1em ;color:red">Log Out</p>
+	    				<img src="imgs/forward.svg" style="width: 15px"class="settings-imgs">
+	    			</li></a>
+	    		</ul>
+	    	</div>
+
+	    </div>
+	    <!-- <div class="log-out-bottom">
+                            	<a href="#" class="js-logout">Log Out</a>
+                            </div> -->
+
+	</section>
+
+	<!-- ----------animal-profile-edit--------- -->
+
+	<section data-role="page" id="animal-profile-edit">
+	    <header data-role="header" id="editAnimal-id">
+	    	<h4 data-role="none" class="user-profile-edit-hader">Edit Animal Profile</h4>
+	    	<div class="user-profile-edit-back">
+	    		<a href="#back" data-rel="back" class="user-profile-edit-a">
+	    			<img src="imgs/back.svg" style="width: 20px">
+	    		</a>
+	    	</div>
+	    	
+	    <!-- 	<h3>User Profile</h3> -->
+	    </header>
+	    <br>
+	    <div data-role="main" class="user-profile-edit-content">
+	    	<div class="user-profile-edit-pic">
+                
+            </div>
+            <div class="alert-mark" onclick="" style="display:none;" id="animal-profile-edit-mark"></div>
+           <div class="alert" id="animal-profile-edit-alert" style="display:none;">
+		            	
+                    </div>
+            
+
+            <form class="add-animal-list" id="list-edit-form">
+				<div class="input edit-animal">
+				  	<label class="add-animal-label">Name</label>
+				  	<input type="text" data-role="none" placeholder="Animal's name" class="edit-animal-info" id="edit-animal-name">
+				</div>
+				
+				<div class="input edit-animal">
+			  		<label class="add-animal-label">Type of the animal</label>
+			  		<select id="edit-animal-type" class="edit-animal-info select-bar" data-role="none" style="background-image: url(imgs/drop-down.svg);background-size: 15px; background-repeat: no-repeat;background-position: 95%;">   
+			  		   
+			  		   	<option value="cow">Cow</option>
+			  		   	<option value="dog">Dog</option>
+			  		   	<option value="pig">Pig</option>
+			  		   	<option value="chiken">Chicken</option>
+			  		   	<option value="donkey">Donkey</option>
+			  		   	<option value="horse">Horse</option>
+			  		   	<option value="duck">Duck</option>
+			  		   	<option value="sheep">Sheep</option>
+			  		</select>
+				</div>
+		 	
+
+				<div class="input edit-animal">
+				  	<label class="add-animal-label">Age</label>
+				  	<input type="text" data-role="none" placeholder="Animal's age" class="edit-animal-info" id="edit-animal-age">
+				</div>
+				
+
+				<div class="input edit-animal">
+				  	<label class="add-animal-label">Gender</label>
+				  		<select id="edit-animal-gender" class="edit-animal-info select-bar" data-role="none" style="background-image: url(imgs/drop-down.svg);background-size: 15px; background-repeat: no-repeat;background-position: 95%;">
+				  			
+				  			<option value="famale">Female</option>
+				  			<option value="male">Male</option>
+				  		</select>
+				</div>
+			
+				<div class="input edit-animal">
+				  	<label class="add-animal-label">Description</label>
+				  	<textarea type="text" data-role="none" placeholder="Describe the animal" class="edit-animal-info animal-description" id="edit-animal-description-id"></textarea>
+				</div>
+				<br>
+				<br>
+				
+				<div class="edit-popup-footer">
+				  	<input data-role="none" type="submit" value="Submit" class="edit-submit-btn">
+				</div>
+				<br>
+				<br>
+			</form>
+		</div>
+		
+</section>
+
+
+	<!-- -----------add-location-page(small map)----------- -->
+
+	<section data-role="page" id="add-location-page">
+		<div class="alert-mark add-location-page-mark hidden" id="add-location-mark" data-role="none"></div>
+		<div class="alert add-location-page-alert hidden" id="add-location-popup" data-role="none">
+			<img src="imgs/wrong.svg" style="width: 30px">
+			<h4 style="font-weight: 700">Discard?</h4>
+			<br>
+			<p>Your changes are not saved. Are you sure you want to discard the changes?</p>
+			<br>
+			<div class="flex-parent add-location-page-mark">
+			  <a href="" onclick="closeAddLocationPop()">
+				<input type="button" data-role="none" value="CANCEL" id="" class="" style="color: #e26241">
+			  </a>
+			   <a href="#animal-profile" onclick="closeAddLocationPop()">
+				<input type="button" data-role="none" value="OK">
+			  </a>
+
+			</div>
+		</div>
+		 <header data-role="header" class="add-location-page-header">
+	
+	    	<div class="user-profile-edit-back">
+	    		<a href="#" onclick="openAddLocationPop()" class="user-profile-edit-a">
+	    			<img src="imgs/back.svg" style="width: 20px">
+	    		</a>
+	    	</div>
+	    	<div style="text-align: center">Add A Location</div>
+
+	     
+	    </header>
+			<div data-role="main" class="add-location-page-main" id="add-location-modal">    
+				<a href="#add-location-page-map"><div class="map-mark">
+					<div class="pick-a-location">Pick a location on map</div>
+				</div></a>
+				<!-- <a href="#add-location-page-map"> -->
+					<div class="map map2"></div>
+<!-- 				</a> -->
+				<form data-ajax="false" class="add-location-page-form" id="add-location-form">
+					<div class="add-location-page-body">
+						<div class="form-control">
+							<!-- //add an icon -->
+
+							<label class="add-location-page-description" for="add-location-description" >Description</label>
+							<div class="flex-parent" style="height: 30px">
+								<img src="imgs/descrip.svg" style="width:20px">
+								<input type="text" placeholder="Describe the location" class="add-location-page-input" id="add-location-description" data-role="none">
+							</div>
+						</div>
+						<div class="form-control hidden">
+							<img src=""><!-- //add an icon -->
+							<label class="add-location-page-description"><b>Location</b></label>
+							<label class="add-location-page-description">Latitude</label>
+							<input type="text" placeholder="add an address" class="add-location-page-input" id="add-location-lat">
+						</div>
+						<div class="form-control hidden">
+							<img src=""><!-- //add an icon -->
+							<label class="add-location-page-description">Longitude</label>
+							<input type="text" placeholder="add an address" class="add-location-page-input" id="add-location-lng">
+						</div>
+
+					</div>
+				
+
+				    <div class="add-location-page-icon">
+						<input type="submit" data-role="none" class="form-button add-location-page-icon-child button-style-child" id="add-submit" value="" data-deactivate="#add-location-modal" style="background-image: url('imgs/send.svg'); background-size:20px;background-repeat: no-repeat;">
+					     </div>
+				</form>
+				<br>
+			 
+
+			  <!-- <div class="add-location-page-icon">
+				<input type="submit" data-role="none" class="form-button add-location-page-icon-child button-style-child" id="add-submit" value="Add" data-deactivate="#add-location-modal">
+			</div> -->
+			</div> 
+
+			
+		</section>
+
+<!-- big-map -->
+
+	<section data-role="page" id="add-location-page-map">
+		 <header data-role="header" class="add-location-page-header">
+	
+	    	<div class="flex-parent add-location-map">
+	    		<a href="#add-location-page"><!-- //cancel -->
+	    			<img src="imgs/back.svg" style="width: 20px">
+	    		</a>
+	    		<div><p>Pick a location</p></div>
+
+	    		<a href="#add-location-page" class="add-location-page-done" >
+	    			<img src="imgs/send.svg" style="width: 20px">
+	    		</a>
+	    	</div>
+	    <!-- 	<h3>User Profile</h3> -->
+	    </header>
+			<div data-role="main">
+				<div class="map map1"></div>
+			
+		
+	</section>
+
+
+
+	<section data-role="page" id="add-animal-map">
+		
+
+
+		 <header data-role="header" class="add-animal-map-header">
+	
+	    	<div class="user-profile-edit-back">
+	    		<a href="#list-page" class="">
+	    			<img src="imgs/back.svg" style="width: 20px">
+	    		</a>
+	    		<a href="#homepage #add-popup1" class="add-location-page-done" >
+	    			<!-- <img src="imgs/back.svg" style="width: 20px"> -->
+	    		</a>
+	    	</div>
+	    <!-- 	<h3>User Profile</h3> -->
+	    </header>
+			<div data-role="main">
+				<div class="map map1"></div>
+				
+		</div>
+	</section>
+		
+
+
+<!-- ---------footer-templete-------------- -->
+
+
+	<script type="text/template" id="footer-nav-template">
+	<ul style="margin:0; margin: 0.3em" class="footer-padding">
+		<li style="display:flex; text-align: center;" >
+			<a href="#homepage" style="color:"#484848" data-deactivate="#add-popup1">
+				<img src="imgs/homepage.svg" style="width: 20px">
+				<p style="font-size:.7em; margin: 8px;color:#484848">Homepage</p>
+			</a>
+		</li>
+		<li style="text-align: center;" data-deactivate="#add-popup1">
+			<a href="#" onclick="openPop1()">
+			<img src="imgs/add.svg" style="width:40px;">
+			
+		</a></li>
+		<li style="display:flex; text-align: center;">
+			<a href="#list-page"style="color:"#484848">
+			<img src="imgs/cow-list.svg" style="width:25px">
+			<p style="font-size:.7em; margin: 3px; color:#484848; line-height: .9;">Animal List</p>
+		</a></li>
+	</ul>
+	</script>
+
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
